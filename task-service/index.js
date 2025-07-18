@@ -5,6 +5,9 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerJsdoc = require('swagger-jsdoc');
 const path = require('path');
 
+// Activate in-process event listeners
+require('./logic/events/taskEventListener');
+
 const app = express();
 const PORT = process.env.PORT || 3001;
 

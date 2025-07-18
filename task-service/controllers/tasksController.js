@@ -1,4 +1,4 @@
-const tasksService = require('../services/tasksService');
+const tasksService = require('../logic/services/taskService');
 
 exports.getAllTasks = async (req, res) => {
   try {
@@ -11,11 +11,11 @@ exports.getAllTasks = async (req, res) => {
 
 exports.createTask = async (req, res) => {
   try {
-    const { title } = req.body;
+    const { title, description } = req.body;
     if (!title || typeof title !== 'string' || !title.trim()) {
       return res.status(400).json({ error: 'Title is required and must be a non-empty string' });
     }
-    const newTask = await tasksService.createTask(title);
+    const newTask = await tasksService.createTask({ title, description });
     res.status(201).json(newTask);
   } catch (error) {
     console.error(error); // Log the error for debugging
